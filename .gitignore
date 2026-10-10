@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+build/
+coverage/
+
+# Generated report audit artifacts
+server/.report-audit/
+
+# Python cache files
+__pycache__/
+*.py[cod]

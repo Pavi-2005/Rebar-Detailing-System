@@ -1,0 +1,125 @@
+{
+  "concreteGrades": {
+    "M20": { "fck": 20, "modulus": 5000 },
+    "M25": { "fck": 25, "modulus": 5000 },
+    "M30": { "fck": 30, "modulus": 5000 },
+    "M35": { "fck": 35, "modulus": 5500 }
+  },
+  "steelGrades": {
+    "Fe250": { "fy": 250 },
+    "Fe415": { "fy": 415 },
+    "Fe500": { "fy": 500 }
+  },
+  "momentCoefficients": {
+    "oneWay": { "positive": 0.125 },
+    "twoWay": { "shortSpan": 0.0625, "longSpan": 0.03125 }
+  },
+  "twoWayMomentCoefficientTables": {
+    "_note": "Explicit support-condition to IS 456 coefficient-table registry. The slab engine resolves a table from the support type and the corner restraint condition; it never falls back to an unnamed 'default' table.",
+    "IS_456_TABLE_26": {
+      "tableReference": "IS 456:2000 Table 26",
+      "appliesWhen": "Corners restrained against uplift / held down (cornerRestraint = RESTRAINED), or a support type that is not the simply supported free-to-lift case.",
+      "momentConvention": "Mx = alpha_x x wu x lx^2; My = alpha_y x wu x lx^2 (IS 456:2000 Table 26 convention, lx is the short span).",
+      "points": [
+        { "m": 1.0, "alphaX": 0.0625, "alphaY": 0.0625 },
+        { "m": 1.1, "alphaX": 0.061, "alphaY": 0.052 },
+        { "m": 1.2, "alphaX": 0.059, "alphaY": 0.047 },
+        { "m": 1.3, "alphaX": 0.057, "alphaY": 0.043 },
+        { "m": 1.4, "alphaX": 0.055, "alphaY": 0.040 },
+        { "m": 1.5, "alphaX": 0.053, "alphaY": 0.037 },
+        { "m": 1.6, "alphaX": 0.051, "alphaY": 0.035 },
+        { "m": 1.7, "alphaX": 0.049, "alphaY": 0.033 },
+        { "m": 1.8, "alphaX": 0.047, "alphaY": 0.031 },
+        { "m": 1.9, "alphaX": 0.045, "alphaY": 0.029 },
+        { "m": 2.0, "alphaX": 0.041, "alphaY": 0.025 }
+      ]
+    },
+    "IS_456_TABLE_27": {
+      "tableReference": "IS 456:2000 Table 27",
+      "appliesWhen": "Slab simply supported on all four sides with corners free to lift (supportType = Simply Supported AND cornerRestraint = FREE_TO_LIFT).",
+      "momentConvention": "Mx = alpha_x x wu x lx^2; My = alpha_y x wu x lx^2 (IS 456:2000 Table 27 convention, lx is the short span).",
+      "tabulationNote": "The published Table 27 is tabulated at ly/lx = 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.75, 2.0, 2.5 and infinity. Finite intermediate values are linearly interpolated only between adjacent finite published rows; the infinity column is not a finite interpolation endpoint.",
+      "points": [
+        { "m": 1.0, "alphaX": 0.062, "alphaY": 0.062 },
+        { "m": 1.1, "alphaX": 0.074, "alphaY": 0.061 },
+        { "m": 1.2, "alphaX": 0.084, "alphaY": 0.059 },
+        { "m": 1.3, "alphaX": 0.093, "alphaY": 0.055 },
+        { "m": 1.4, "alphaX": 0.099, "alphaY": 0.051 },
+        { "m": 1.5, "alphaX": 0.104, "alphaY": 0.046 },
+        { "m": 1.75, "alphaX": 0.113, "alphaY": 0.037 },
+        { "m": 2.0, "alphaX": 0.118, "alphaY": 0.029 },
+        { "m": 2.5, "alphaX": 0.122, "alphaY": 0.020 },
+        { "m": "Infinity", "alphaX": 0.124, "alphaY": 0.014 }
+      ]
+    }
+  },
+  "modificationFactors": {
+    "spanDepth": 1.0,
+    "tension": 1.0,
+    "compression": 1.0
+  },
+  "kFactors": {
+    "M20": 1.0,
+    "M25": 1.0,
+    "M30": 1.0,
+    "M35": 1.0
+  },
+  "slabDetailing": {
+    "minimumClearSpacingMm": 25,
+    "maximumSpacingRule": "IS 456:2000 Clause 26.3.3: main reinforcement spacing shall not exceed 3d or 300 mm, whichever is less. Both directions of a two-way slab are treated as main flexural reinforcement.",
+    "minimumClearSpacingRule": "IS 456:2000 Clause 26.3.2: adopted minimum clear spacing is 25 mm for this design input set; the larger of bar diameter and 5 mm above nominal maximum aggregate size governs when aggregate size is supplied."
+  },
+  "slabDeflection": {
+    "source": "IS 456:2000 Clause 23.2.1(c), Fig. 4; the values are an approximate digitization of the published graph image and are not an exact reproduction of the code figure.",
+    "datasetVersion": "fig4-approx-2026-09",
+    "description": "Approximate tension-reinforcement deflection modification-factor curves digitized from the published Fig. 4 graph. These values are not exact tabulations from IS 456.",
+    "xAxis": "pt_percent",
+    "yAxis": "fs_N_per_mm2",
+    "validPtRange": { "min": 0.15, "max": 2.0 },
+    "validFsRange": { "min": 100, "max": 350 },
+    "interpolation": "Bilinear interpolation between the explicitly named fs curves and shared pt points. Interpolation is only used when both inputs are within the validated Fig. 4 dataset range; otherwise the result is flagged as VERIFICATION REQUIRED.",
+    "curves": [
+      { "fs": 100, "points": [{ "pt": 0.15, "factor": 1.60 }, { "pt": 0.25, "factor": 1.80 }, { "pt": 0.50, "factor": 2.00 }, { "pt": 0.75, "factor": 2.00 }, { "pt": 1.00, "factor": 2.00 }, { "pt": 1.50, "factor": 2.00 }, { "pt": 2.00, "factor": 2.00 }] },
+      { "fs": 150, "points": [{ "pt": 0.15, "factor": 1.45 }, { "pt": 0.25, "factor": 1.65 }, { "pt": 0.50, "factor": 1.85 }, { "pt": 0.75, "factor": 2.00 }, { "pt": 1.00, "factor": 2.00 }, { "pt": 1.50, "factor": 2.00 }, { "pt": 2.00, "factor": 2.00 }] },
+      { "fs": 200, "points": [{ "pt": 0.15, "factor": 1.30 }, { "pt": 0.25, "factor": 1.50 }, { "pt": 0.50, "factor": 1.70 }, { "pt": 0.75, "factor": 1.90 }, { "pt": 1.00, "factor": 2.00 }, { "pt": 1.50, "factor": 2.00 }, { "pt": 2.00, "factor": 2.00 }] },
+      { "fs": 250, "points": [{ "pt": 0.15, "factor": 1.15 }, { "pt": 0.25, "factor": 1.35 }, { "pt": 0.50, "factor": 1.55 }, { "pt": 0.75, "factor": 1.75 }, { "pt": 1.00, "factor": 1.95 }, { "pt": 1.50, "factor": 2.00 }, { "pt": 2.00, "factor": 2.00 }] },
+      { "fs": 300, "points": [{ "pt": 0.15, "factor": 1.00 }, { "pt": 0.25, "factor": 1.20 }, { "pt": 0.50, "factor": 1.40 }, { "pt": 0.75, "factor": 1.60 }, { "pt": 1.00, "factor": 1.80 }, { "pt": 1.50, "factor": 1.95 }, { "pt": 2.00, "factor": 2.00 }] },
+      { "fs": 350, "points": [{ "pt": 0.15, "factor": 0.90 }, { "pt": 0.25, "factor": 1.05 }, { "pt": 0.50, "factor": 1.25 }, { "pt": 0.75, "factor": 1.45 }, { "pt": 1.00, "factor": 1.65 }, { "pt": 1.50, "factor": 1.85 }, { "pt": 2.00, "factor": 1.95 }] }
+    ]
+  },
+  "shearStrengthTable": {
+    "M20": { "0.15": 0.28, "0.25": 0.36, "0.50": 0.48, "0.75": 0.56, "1.00": 0.62, "1.25": 0.67, "1.50": 0.70, "1.75": 0.72, "2.00": 0.74, "2.50": 0.76, "3.00": 0.78 },
+    "M25": { "0.15": 0.29, "0.25": 0.36, "0.50": 0.49, "0.75": 0.57, "1.00": 0.64, "1.25": 0.70, "1.50": 0.74, "1.75": 0.77, "2.00": 0.79, "2.50": 0.82, "3.00": 0.83 },
+    "M30": { "0.15": 0.30, "0.25": 0.37, "0.50": 0.50, "0.75": 0.59, "1.00": 0.66, "1.25": 0.72, "1.50": 0.76, "1.75": 0.80, "2.00": 0.82, "2.50": 0.85, "3.00": 0.88 },
+    "M35": { "0.15": 0.29, "0.25": 0.38, "0.50": 0.52, "0.75": 0.62, "1.00": 0.70, "1.25": 0.75, "1.50": 0.79, "1.75": 0.83, "2.00": 0.86, "2.50": 0.89, "3.00": 0.92 }
+  },
+  "maximumShearStress": {
+    "M20": 2.8,
+    "M25": 3.1,
+    "M30": 3.5,
+    "M35": 3.7,
+    "M40": 4.0,
+    "M45": 4.0
+  },
+  "designConstants": {
+    "clearCover": 25,
+    "beta": 0.87,
+    "gammaM": 1.15
+  },
+  "columnDesign": {
+    "longitudinalDiameters": [12, 16, 20, 25, 28, 32],
+    "tieDiameters": [6, 8, 10, 12],
+    "minimumLongitudinalSteelRatio": 0.008,
+    "maximumLongitudinalSteelRatio": 0.06,
+    "shortColumnSlendernessLimit": 12,
+    "sectionEquilibriumRelativeTolerance": 0.00001,
+    "sectionEquilibriumAbsoluteToleranceKn": 0.01,
+    "supportedFrameCondition": "BRACED_NON_SWAY",
+    "supportConditionFactors": {
+      "BOTH_ENDS_HELD_RESTRAINED": 0.65,
+      "ONE_END_RESTRAINED_OTHER_NOT": 0.8,
+      "BOTH_ENDS_HELD_NO_ROTATION_RESTRAINT": 1.0,
+      "ONE_END_FREE": 2.0
+    }
+  }
+}
